@@ -303,17 +303,4 @@ Run `mvn clean verify`. There are **35 JUnit 5 tests**: 29 core tests and 6 lice
 Coverage includes all element dispatch methods, source/test/configuration/dependency rules, exact statistics, quality PASS and FAIL, threshold equality, no source files, custom thresholds, compliance violations and traversal order, empty directories, 100-level nesting, long totals, invalid inputs, immutable collections, and the additional visitor. The demo JAR runs the same visitors on both complete fixtures.
 
 The workflow in `.github/workflows/ci.yml` runs the Maven check and the JAR after publication. A local build is separate from a GitHub Actions result; inspect the Actions tab after pushing.
-
-## Git development history and submission
-
-The repository contains separate commits for setup, the model, each required operation, the demo, core tests, the extra visitor, and final documentation. All commits use real current timestamps; they are not backdated. Inspect them with:
-
-```bash
-git log --oneline --reverse
-git show --stat f80042e
-git show f80042e -- src/main/java/kz/aitu/inspection/model
-```
-
-The last command has no diff: the additional visitor commit does not change existing element classes. Its integration changes only the client and adds its implementation and tests.
-
-Publish the existing history using [docs/PUBLISH.md](docs/PUBLISH.md). Uploading only loose source files through the GitHub web interface would discard the local development commits. Submit the **public repository URL** and this README as required by Moodle. The uploaded project archive alone is not the required public GitHub submission.
+W
