@@ -1,0 +1,65 @@
+classDiagram
+direction TB
+class ProjectElement {
+  <<interface>>
+  +accept(ProjectVisitor visitor) void
+}
+class ProjectVisitor {
+  <<interface>>
+  +visit(SourceCodeFile file) void
+  +visit(TestFile file) void
+  +visit(ConfigurationFile file) void
+  +visit(DependencyFile file) void
+  +visit(Directory directory) void
+}
+class SourceCodeFile {
+  +String name
+  +String module
+  +int linesOfCode
+  +int complexity
+  +boolean hardcodedCredentials
+  +boolean highRisk
+  +accept(ProjectVisitor visitor) void
+}
+class TestFile {
+  +String name
+  +int linesOfCode
+  +int testCases
+  +Set coveredModules
+  +boolean hardcodedCredentials
+  +accept(ProjectVisitor visitor) void
+}
+class ConfigurationFile {
+  +String name
+  +int linesOfCode
+  +boolean exposedCredentials
+  +boolean secureTransport
+  +boolean debugEnabled
+  +accept(ProjectVisitor visitor) void
+}
+class DependencyFile {
+  +String name
+  +int linesOfCode
+  +List dependencies
+  +accept(ProjectVisitor visitor) void
+}
+class Dependency {
+  +String coordinate
+  +String version
+  +String license
+  +boolean vulnerable
+}
+class Directory {
+  +String name
+  +List children
+  +accept(ProjectVisitor visitor) void
+}
+ProjectElement <|.. SourceCodeFile
+ProjectElement <|.. TestFile
+ProjectElement <|.. ConfigurationFile
+ProjectElement <|.. DependencyFile
+ProjectElement <|.. Directory
+Directory o-- "0..*" ProjectElement : children
+DependencyFile o-- "0..*" Dependency : dependencies
+ProjectElement ..> ProjectVisitor : accept
+ProjectVisitor ..> ProjectElement : typed visit overloads

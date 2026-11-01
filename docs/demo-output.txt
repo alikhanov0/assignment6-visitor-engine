@@ -1,0 +1,71 @@
+=== fintech-project ===
+SECURITY AUDIT
+Score: 0/100
+Critical: 5, warnings: 1
+CRITICAL | PaymentService.java | EXPOSED_CREDENTIALS | Remove exposed credentials
+CRITICAL | PaymentService.java | HIGH_RISK_SOURCE | High-risk source requires review
+CRITICAL | application.properties | EXPOSED_CREDENTIALS | Remove exposed credentials
+CRITICAL | application.properties | INSECURE_TRANSPORT | Enable secure transport
+WARNING | application.properties | DEBUG_ENABLED | Disable production debug mode
+CRITICAL | pom.xml | VULNERABLE_DEPENDENCY | org.example:payments-sdk:1.0.0 is flagged vulnerable
+
+PROJECT STATISTICS
+Files: 5 (source: 2, test: 1)
+Directories: 4
+Lines of code: 530
+Test cases: 8
+Dependencies: 2
+Average source complexity: 11.00
+Test/source file ratio: 0.50
+
+QUALITY GATE
+Security: FAIL (5 critical)
+Complexity: FAIL (11.00 <= 10.00)
+Tests: PASS (0.50 >= 0.40)
+Source present: PASS
+FINAL RESULT: FAILED
+
+COMPLIANCE CHECK
+Result: FAIL
+Violations: 5
+CRITICAL | PaymentService.java | EXPOSED_CREDENTIALS | Credentials must not be exposed
+CRITICAL | application.properties | EXPOSED_CREDENTIALS | Credentials must not be exposed
+CRITICAL | pom.xml | MISSING_VERSION | com.legacy:unsafe-crypto
+CRITICAL | pom.xml | PROHIBITED_DEPENDENCY | com.legacy:unsafe-crypto
+CRITICAL | users | UNTESTED_MODULE | Production module has no declared tests
+
+LICENSE AUDIT
+Dependencies checked: 2
+Result: FAIL
+CRITICAL | pom.xml | UNAPPROVED_LICENSE | com.legacy:unsafe-crypto uses GPL-3.0-only
+
+=== fintech-project-fixed ===
+SECURITY AUDIT
+Score: 100/100
+Critical: 0, warnings: 0
+No security issues
+
+PROJECT STATISTICS
+Files: 6 (source: 2, test: 2)
+Directories: 4
+Lines of code: 570
+Test cases: 13
+Dependencies: 1
+Average source complexity: 7.00
+Test/source file ratio: 1.00
+
+QUALITY GATE
+Security: PASS (0 critical)
+Complexity: PASS (7.00 <= 10.00)
+Tests: PASS (1.00 >= 0.40)
+Source present: PASS
+FINAL RESULT: PASSED
+
+COMPLIANCE CHECK
+Result: PASS
+Violations: 0
+
+LICENSE AUDIT
+Dependencies checked: 1
+Result: PASS
+

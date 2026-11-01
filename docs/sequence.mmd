@@ -1,0 +1,17 @@
+sequenceDiagram
+participant Client as Demo
+participant Root as Directory
+participant Audit as SecurityAuditVisitor
+participant Source as SourceCodeFile
+Client->>Root: accept(audit)
+Root->>Audit: visit(this Directory)
+activate Audit
+Note over Audit: inherited recursive directory traversal
+loop each child including nested directories
+Audit->>Source: accept(this visitor)
+Source->>Audit: visit(this SourceCodeFile)
+Note over Audit: evaluate credential and high risk flags
+end
+deactivate Audit
+Client->>Audit: report()
+Audit-->>Client: security findings and score

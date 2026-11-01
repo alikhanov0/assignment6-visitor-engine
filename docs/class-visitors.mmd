@@ -1,0 +1,50 @@
+classDiagram
+direction TB
+class ProjectVisitor {
+  <<interface>>
+  +visit(SourceCodeFile file) void
+  +visit(TestFile file) void
+  +visit(ConfigurationFile file) void
+  +visit(DependencyFile file) void
+  +visit(Directory directory) void
+}
+class RecursiveProjectVisitor {
+  <<abstract>>
+  +visit(Directory directory) void
+}
+class SecurityAuditVisitor {
+  +issues() List
+  +criticalCount() long
+  +warningCount() long
+  +score() int
+  +report() String
+}
+class ProjectStatisticsVisitor {
+  +statistics() Statistics
+  +report() String
+}
+class QualityGateVisitor {
+  +QualityGateVisitor()
+  +QualityGateVisitor(double maxComplexity, double minTestRatio)
+  +result() Result
+  +report() String
+}
+class ComplianceVisitor {
+  +issues() List
+  +passed() boolean
+  +report() String
+}
+class LicenseAuditVisitor {
+  +checkedDependencies() long
+  +issues() List
+  +passed() boolean
+  +report() String
+}
+ProjectVisitor <|.. RecursiveProjectVisitor
+ProjectVisitor <|.. QualityGateVisitor
+RecursiveProjectVisitor <|-- SecurityAuditVisitor
+RecursiveProjectVisitor <|-- ProjectStatisticsVisitor
+RecursiveProjectVisitor <|-- ComplianceVisitor
+RecursiveProjectVisitor <|-- LicenseAuditVisitor
+QualityGateVisitor *-- SecurityAuditVisitor : security
+QualityGateVisitor *-- ProjectStatisticsVisitor : statistics
