@@ -18,13 +18,16 @@ public final class Demo {
         ProjectStatisticsVisitor statistics = new ProjectStatisticsVisitor();
         QualityGateVisitor quality = new QualityGateVisitor();
         ComplianceVisitor compliance = new ComplianceVisitor();
+        LicenseAuditVisitor licenses = new LicenseAuditVisitor();
         project.accept(security);
         project.accept(statistics);
         project.accept(quality);
         project.accept(compliance);
+        project.accept(licenses);
         System.out.println(security.report());
         System.out.println(statistics.report());
         System.out.println(quality.report());
         System.out.println(compliance.report());
+        System.out.println(licenses.report());
     }
 }
